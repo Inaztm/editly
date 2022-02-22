@@ -195,7 +195,7 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         const inputDuration = cutTo - cutFrom;
 
         // const speedFactor = clipDuration / inputDuration;
-        const speedFactor = 1;
+        const speedFactor = layer.speedFactor || 1;
 
         return { ...layer, cutFrom, cutTo, speedFactor };
       }
@@ -213,7 +213,7 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         //   speedFactor = 1;
         // }
 
-        speedFactor = 1;
+        speedFactor = layer.speedFactor || 1;
 
         return { ...layer, speedFactor };
       }
