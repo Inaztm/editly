@@ -205,12 +205,14 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         let speedFactor;
 
         // If user explicitly specified duration for clip, it means that should be the output duration of the video
-        if (userClipDuration) {
-          // Later we will speed up or slow down video using this factor
-          speedFactor = userClipDuration / inputDuration;
-        } else {
-          speedFactor = 1;
-        }
+        // if (userClipDuration) {
+        //   // Later we will speed up or slow down video using this factor
+        //   speedFactor = userClipDuration / inputDuration;
+        // } else {
+        //   speedFactor = 1;
+        // }
+
+        speedFactor = 1;
 
         return { ...layer, speedFactor };
       }
