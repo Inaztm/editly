@@ -213,7 +213,7 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         // If user explicitly specified duration for clip, it means that should be the output duration of the video
         // eslint-disable-next-line no-prototype-builtins
         if (layer.hasOwnProperty('speedFactor')) {
-          speedFactor = layer.speedFactor || 1;
+          speedFactor = layer.speedFactor;
         } else if (userClipDuration) {
           // Later we will speed up or slow down video using this factor
           speedFactor = userClipDuration / inputDuration;
