@@ -193,9 +193,14 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         assert(cutFrom < cutTo, 'cutFrom must be lower than cutTo');
 
         const inputDuration = cutTo - cutFrom;
+        let speedFactor = 1;
 
-        // const speedFactor = clipDuration / inputDuration;
-        const speedFactor = layer.speedFactor || 1;
+        // eslint-disable-next-line no-prototype-builtins
+        if (layer.hasOwnProperty('speedFactor')) {
+          speedFactor = layer.speedFactor;
+        } else {
+          speedFactor = clipDuration / inputDuration;
+        }
 
         return { ...layer, cutFrom, cutTo, speedFactor };
       }
@@ -206,14 +211,15 @@ async function parseConfig({ defaults: defaultsIn = {}, clips, arbitraryAudio: a
         let speedFactor;
 
         // If user explicitly specified duration for clip, it means that should be the output duration of the video
-        // if (userClipDuration) {
-        //   // Later we will speed up or slow down video using this factor
-        //   speedFactor = userClipDuration / inputDuration;
-        // } else {
-        //   speedFactor = 1;
-        // }
-
-        speedFactor = layer.speedFactor || 1;
+        // eslint-disable-next-line no-prototype-builtins
+        if (layer.hasOwnProperty('speedFactor')) {
+          speedFactor = layer.speedFactor || 1;
+        } else if (userClipDuration) {
+          // Later we will speed up or slow down video using this factor
+          speedFactor = userClipDuration / inputDuration;
+        } else {
+          speedFactor = 1;
+        }
 
         return { ...layer, speedFactor };
       }
